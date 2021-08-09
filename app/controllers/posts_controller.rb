@@ -23,8 +23,12 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     @post.content = params[:content]
-    @post.save
-    redirect_to("/posts/index")
+    if @post.save
+      flash[:notice] = "Edited post :)"  
+      redirect_to("/posts/index")
+    else
+      render("posts/edit")
+    end
   end
 
   def destroy
