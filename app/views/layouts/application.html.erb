@@ -12,26 +12,39 @@
 
   <body>
     <header>
-     <div class="header-logo">
-      <%= link_to("TweetApp", "/") %>
-     </div>
-     <ul class="header-menus">
-      <li>
-        <%= link_to("About TweetApp", "/about") %>
-      </li>
-      <li>
-        <%= link_to("Post list", "/posts/index") %>
-      </li>
-      <li>
-        <%= link_to("New post", "/posts/new") %>
-      </li>
-      <li>
-        <%= link_to("User list", "/users/index") %>
-      </li>
-      <li>
-        <%= link_to("Signup", "/signup") %>
-      </li>
-     </ul>
+      <div class="header-logo">
+        <%= link_to("TweetApp", "/") %>
+      </div>
+      <ul class="header-menus">
+        <% if session[:user_id] %>
+          <li>
+            <%= session[:user_id] %>
+          </li>
+          <li>
+            <%= link_to("Postlist", "/posts/index") %>
+          </li>
+          <li>
+            <%= link_to("New post", "/posts/new") %>
+          </li>
+          <li>
+            <%= link_to("User list", "/users/index") %>
+          </li>
+          <li>
+            <%= link_to("Logout", "/logout", {method: "post"}) %>
+          </li>
+        
+        <% else %>
+          <li>
+            <%= link_to("About TweetApp", "/about") %>
+          </li>
+          <li>
+            <%= link_to("Signup", "/signup") %>
+          </li>
+          <li>
+            <%= link_to("Login", "/login") %>
+          </li>
+        <% end %>
+      </ul>
     </header>
     <% if flash[:notice] %>
       <div class="flash">
